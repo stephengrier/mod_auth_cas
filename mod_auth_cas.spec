@@ -27,6 +27,12 @@ Requires:       httpd
 mod_auth_cas is an Apache 2.0/2.2 compliant module that supports the CASv1
 and CASv2 protocols
 
+This package was custom built at UCL. See:
+
+https://jenkins.dcs.ucl.ac.uk/job/mod_auth_cas
+https://github.com/stephengrier/mod_auth_cas
+
+
 %prep
 %setup -q
 
