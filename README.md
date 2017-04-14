@@ -28,9 +28,10 @@ service docker.io start
 Once you've got docker installed you can build the mod_auth_cas RPM by doing:
 
 ```bash
-git clone https://github.com/stephengrier/mod_auth_cas.git
-cd mod_auth_cas/
 docker run --rm -v $(pwd):/host --hostname="centos6.build.ucl.ac.uk" centos:centos6 /host/build-rpm.sh
+
+docker run --rm -v $(pwd):/host --hostname="centos7.build.ucl.ac.uk" centos:centos7 /host/build-rpm.sh
+
 ```
 
 All being well you should be left with an RPM in the cwd.

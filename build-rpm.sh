@@ -11,11 +11,12 @@ set -e
 name="mod_auth_cas";
 workdir="/tmp";
 hostdir="/host";
-sourceUrl="https://github.com/Jasig/mod_auth_cas.git";
+#sourceUrl="https://github.com/Jasig/mod_auth_cas.git";
+sourceUrl="https://github.com/rohajda/mod_auth_cas-1.git";
 
 # Install build dependencies.
 yum -y install rpm-build tar git redhat-rpm-config \
-               openssl-devel httpd-devel libcurl-devel \
+               make openssl-devel httpd-devel libcurl-devel \
                gcc pcre-devel;
 
 # Get the source.
@@ -35,6 +36,13 @@ version=$(grep 'PACKAGE_VERSION=' configure | cut -d\' -f2);
 cp -p ${hostdir}/${name}.spec .;
 sed -i "s/^Version:.*/Version: ${version}/" ${name}.spec;
 sed -i "s/^Release:.*/Release: ${release}/" ${name}.spec;
+sed -i "s/^Source0:.*/Source0:        ${name}-${version}.tar.gz/" ${name}.spec;
+
+#echo Before APX
+#repoquery -ql httpd-devel
+
+
+sed -i "s/^%configure .*/%configure  --with-apxs=\/usr\/bin\/apxs/" ${name}.spec;
 
 # Now build the tarball.
 cd ../ && mv ${name} ${name}-${version};
